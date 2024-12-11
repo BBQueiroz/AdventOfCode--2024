@@ -27,27 +27,33 @@ public class DayOne {
             Collections.sort(locationA);
             Collections.sort(locationB);
 
-            System.out.println(findTotalDistance(locationA, locationB));
-            System.out.println(findSimilarityScore(locationA,locationB));
+            long initial = System.currentTimeMillis();
+            findTotalDistance(locationA, locationB);
+            long end = System.currentTimeMillis();
+            System.out.println("Tempo total: " + (end - initial) + " ms\n");
+            initial = System.currentTimeMillis();
+            findSimilarityScore(locationA,locationB);
+            end = System.currentTimeMillis();
+            System.out.println("Tempo total: " + (end - initial) + " ms\n");
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    public static int findTotalDistance(List<Integer> listA, List<Integer> listB) {
+    public static void findTotalDistance(List<Integer> listA, List<Integer> listB) {
         int totalDistance = 0;
         for (int i = 0; i < listA.size(); i++){
             totalDistance += Math.abs(listA.get(i) - listB.get(i));
         }
-        return totalDistance;
+        System.out.println(totalDistance);
     }
 
-    public static int findSimilarityScore(List<Integer> listA, List<Integer> listB){
+    public static void findSimilarityScore(List<Integer> listA, List<Integer> listB){
         int similarityScore = 0;
         for(Integer location: listA){
             Integer frequency = Collections.frequency(listB, location);
             similarityScore += location * frequency;
         }
-        return similarityScore;
+        System.out.println(similarityScore);
     }
 }
